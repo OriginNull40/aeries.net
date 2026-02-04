@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resource Viewer</title>
+    <title>System Loading...</title>
     <style>
         body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; color: #555; font-family: sans-serif; }
         #app-root { width: 100%; height: 100%; }
@@ -9,24 +9,23 @@
     </style>
 </head>
 <body>
-    <div id="status">Status: Initializing...</div>
+    <div id="status">Status: Awakening Engine...</div>
     <div id="app-root"></div>
 
-    <script src="https://webrcade.github.io/webrcade-app-common/player/index.js"></script>
+    <script src="engine.js"></script>
 
     <script>
         window.onload = function() {
             const status = document.getElementById('status');
             try {
-                // If the script above loaded, 'WebRcadePlayer' will exist
                 if (typeof WebRcadePlayer !== 'undefined') {
-                    status.innerHTML = "Status: Connecting to Feed...";
-                    const feedUrl = "https://OriginNull40.github.io/project-files/feed.json";
+                    status.innerHTML = "Status: Booting Database...";
+                    // We use a relative link so it stays inside your repo
                     const player = new WebRcadePlayer("app-root");
-                    player.loadFeed(feedUrl);
+                    player.loadFeed("feed.json");
                     status.innerHTML = ""; 
                 } else {
-                    status.innerHTML = "Status: Engine script failed to initialize.";
+                    status.innerHTML = "Status: Engine.js not found in repository.";
                 }
             } catch (err) {
                 status.innerHTML = "Status: Error - " + err.message;
