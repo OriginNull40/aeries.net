@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Syncing Resources...</title>
+    <title>Resource Viewer</title>
+    <meta charset="UTF-8">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; }
+        #container { width: 100%; height: 100%; }
+    </style>
 </head>
-<body style="background:#000; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; font-family:sans-serif;">
-    <div id="status">Connecting to Archive...</div>
+<body>
+    <div id="container"></div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@webrcade/app-common@1.1.0/dist/index.min.js"></script>
+    
     <script>
-        // 1. Get your current website address automatically
-        // Example: https://originnull40.github.io/project-files/
-        var currentUrl = window.location.href.replace('play.html', '');
-        
-        // 2. Point to your feed.json
-        var feedUrl = currentUrl + 'feed.json';
-        
-        // 3. Build the final "Teleport" link
-        var finalDestination = "https://webrcade.github.io/webrcade-app-common/player/index.html?feed=" + encodeURIComponent(feedUrl);
-        
-        // 4. Go!
-        setTimeout(function() {
-            window.location.href = finalDestination;
-        }, 500);
+        window.onload = function() {
+            // This starts the player directly on YOUR page
+            // No redirects, no 404s, no "accessed URLs" that say webrcade.com
+            const player = new window.WebRcadePlayer("container");
+            player.loadFeed("https://OriginNull40.github.io/project-files/feed.json");
+        };
     </script>
 </body>
 </html>
