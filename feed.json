@@ -1,16 +1,14 @@
 {
-  "title": "OriginNull40 PSX",
+  "title": "Archive",
   "categories": [
     {
-      "title": "PlayStation",
+      "title": "Resources",
       "items": [
         {
-          "title": "Final Fantasy VII",
+          "title": "FFVII",
           "type": "psx",
           "props": {
-            "discs": [
-              "https://archive.org/download/psx_final_fantasy_vii/Final%20Fantasy%20VII%20%28USA%29%20%28Disc%201%29.chd"
-            ]
+            "discs": ["https://archive.org/download/psx_final_fantasy_vii/Final%20Fantasy%20VII%20%28USA%29%20%28Disc%201%29.chd"]
           }
         }
       ]
@@ -18,8 +16,8 @@
   ],
   "props": {
     "psx_bios": [
-      "https://OriginNull40.github.io/powerschool.sandi.net/scph5501.txt",
-      "https://OriginNull40.github.io/powerschool.sandi.net/scph5500.txt"
+      "https://OriginNull40.github.io/aeries.net/scph5501.txt",
+      "https://OriginNull40.github.io/aeries.net/scph5500.txt"
     ]
   }
 }
