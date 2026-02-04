@@ -9,24 +9,25 @@
     </style>
 </head>
 <body>
-    <div id="status">Status: Loading Engine...</div>
+    <div id="status">Status: Initializing...</div>
     <div id="app-root"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@webrcade/app-common@1.2.10/dist/index.min.js"></script>
+    <script src="https://webrcade.github.io/webrcade-app-common/player/index.js"></script>
 
     <script>
         window.onload = function() {
             const status = document.getElementById('status');
             try {
-                status.innerHTML = "Status: Connecting to Feed...";
-                
-                // Using the full URL to ensure there is no path confusion
-                const feedUrl = "https://OriginNull40.github.io/project-files/feed.json";
-                
-                const player = new WebRcadePlayer("app-root");
-                player.loadFeed(feedUrl);
-                
-                status.innerHTML = ""; // Success! Hide the status.
+                // If the script above loaded, 'WebRcadePlayer' will exist
+                if (typeof WebRcadePlayer !== 'undefined') {
+                    status.innerHTML = "Status: Connecting to Feed...";
+                    const feedUrl = "https://OriginNull40.github.io/project-files/feed.json";
+                    const player = new WebRcadePlayer("app-root");
+                    player.loadFeed(feedUrl);
+                    status.innerHTML = ""; 
+                } else {
+                    status.innerHTML = "Status: Engine script failed to initialize.";
+                }
             } catch (err) {
                 status.innerHTML = "Status: Error - " + err.message;
             }
