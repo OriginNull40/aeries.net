@@ -16,8 +16,8 @@
   ],
   "props": {
     "psx_bios": [
-      "https://OriginNull40.github.io/aeries.net/scph5501.txt",
-      "https://OriginNull40.github.io/aeries.net/scph5500.txt"
+      "https://OriginNull40.github.io/project-files/scph5501.txt",
+      "https://OriginNull40.github.io/project-files/scph5500.txt"
     ]
   }
 }
