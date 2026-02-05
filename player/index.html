@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Engine Room</title>
+    <style>body { margin: 0; background: #000; color: #0f0; font-family: monospace; }</style>
+</head>
+<body>
+    <div id="emulator-target">LOADING PS1 CORE...</div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const feedUrl = params.get('feed');
+        console.log("Core active. Fetching: " + feedUrl);
+        
+        // This is where we will eventually paste the massive 
+        // 50,000 line emulator code so it runs "locally"
+    </script>
+</body>
+</html>
