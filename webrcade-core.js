@@ -1,25 +1,17 @@
 window.WebRcadePlayer = class {
     constructor(id) {
-        this.instanceId = id;
+        this.container = document.getElementById(id);
     }
-
-    async loadFeed(feedUrl) {
-        const root = document.getElementById(this.instanceId);
-        
-        // We use a relative path. This tells the browser: 
-        // "Stay in the current folder, just go into the 'player' directory."
-        // This avoids using any 'webrcade.github.io' links that Blocksi hates.
-        const playerFrame = document.createElement('iframe');
-        
-        // This is the relative path to your new file
-        playerFrame.src = "./player/index.html?feed=" + encodeURIComponent(feedUrl);
-        
-        playerFrame.style.width = "100%";
-        playerFrame.style.height = "100vh";
-        playerFrame.style.border = "none";
-        
-        root.innerHTML = ""; 
-        root.appendChild(playerFrame);
-        console.log("Iframe redirected to local player room.");
+    loadFeed(url) {
+        // This is the actual code that will start the game
+        console.log("Feed triggered: " + url);
+        this.container.innerHTML = `
+            <div style="padding:20px; color:white;">
+                <h2>CORE LOADED</h2>
+                <p>Target: ${url}</p>
+                <button onclick="window.parent.location.reload()" style="padding:10px;">RESTART SYSTEM</button>
+            </div>
+        `;
+        // In the next step, we will inject the actual .wasm emulator here.
     }
 };
