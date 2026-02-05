@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>System Boot</title>
+    <title>Console</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; color: #0f0; font-family: monospace; }
-        #status { position: absolute; bottom: 10px; left: 10px; font-size: 12px; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; background-color: #000; color: #0f0; font-family: monospace; }
+        #debug-log { position: absolute; top: 10px; left: 10px; z-index: 100; font-size: 14px; pointer-events: none; }
     </style>
 </head>
 <body>
-    <div id="status">INITIATING...</div>
-    <div id="app-root"></div>
-
-    <script src="engine.js"></script>
+    <div id="debug-log">SYSTEM STARTING...</div>
+    <div id="app-root" style="width:100vw; height:100vh;"></div>
 
     <script>
-        let attempts = 0;
-        const checkEngine = setInterval(() => {
-            attempts++;
-            document.getElementById('status').innerHTML = "BOOT ATTEMPT: " + attempts + "/10";
+        const log = document.getElementById('debug-log');
+        
+        // 1. Force the engine to load by creating a script tag manually
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@webrcade/app-common@1.2.10/dist/index.min.js';
+        document.head.appendChild(script);
+
+        log.innerHTML += "<br>ENGINE REQUESTED...";
+
+        // 2. Check every second to see if it arrived
+        let count = 0;
+        const checker = setInterval(() => {
+            count++;
+            log.innerHTML = "SYSTEM STARTING...<br>ENGINE REQUESTED...<br>SEARCHING: " + count + "/10";
 
             if (typeof WebRcadePlayer !== 'undefined') {
-                clearInterval(checkEngine);
-                document.getElementById('status').innerHTML = "ENGINE FOUND! LOADING GAMES...";
-                const player = new WebRcadePlayer("app-root");
-                player.loadFeed("feed.json");
+                clearInterval(checker);
+                log.innerHTML = "SUCCESS: ENGINE FOUND. BOOTING FEED...";
+                log.style.color = "yellow";
                 
-                // Hide status after success
-                setTimeout(() => { document.getElementById('status').style.display='none'; }, 3000);
+                try {
+                    const player = new WebRcadePlayer("app-root");
+                    player.loadFeed("feed.json");
+                    setTimeout(() => { log.style.display = 'none'; }, 5000);
+                } catch (e) {
+                    log.innerHTML = "FEED ERROR: " + e.message;
+                }
             }
 
-            if (attempts >= 10) {
-                clearInterval(checkEngine);
-                document.getElementById('status').innerHTML = "FATAL ERROR: Engine Blocked by School Filter.";
-                document.getElementById('status').style.color = "red";
+            if (count >= 10) {
+                clearInterval(checker);
+                log.innerHTML = "FATAL ERROR: ENGINE BLOCKED BY FILTER.<br>USE THE GOOGLE DOC SMUGGLE METHOD.";
+                log.style.color = "red";
             }
-        }, 1000); // Checks every second for 10 seconds
+        }, 1000);
     </script>
 </body>
 </html>
