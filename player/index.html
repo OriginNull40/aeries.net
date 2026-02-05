@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Engine Room</title>
-    <style>body { margin: 0; background: #000; color: #0f0; font-family: monospace; }</style>
+    <title>PS1 Kernel</title>
+    <style>
+        body { margin: 0; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
+        #status { padding: 10px; }
+    </style>
 </head>
 <body>
-    <div id="emulator-target">LOADING PS1 CORE...</div>
+    <div id="status">INITIALIZING PSX VM...</div>
+    <div id="webrcade-app-root"></div>
+
     <script>
+        // 1. Get the feed URL from the address bar
         const params = new URLSearchParams(window.location.search);
         const feedUrl = params.get('feed');
-        console.log("Core active. Fetching: " + feedUrl);
-        
-        // This is where we will eventually paste the massive 
-        // 50,000 line emulator code so it runs "locally"
+
+        // 2. This function injects the actual Emulator Engine
+        async function injectEngine() {
+            document.getElementById('status').innerText = "FETCHING CORE... (THIS MAY TAKE 30s)";
+            
+            try {
+                const script = document.createElement('script');
+                // We use the UNPKG bypass link for the core engine
+                script.src = 'https://unpkg.com/@webrcade/app-common@1.2.10/dist/index.min.js';
+                
+                script.onload = () => {
+                    document.getElementById('status').innerText = "CORE SECURED. BOOTING FFVII...";
+                    
+                    // Start the real webRcade player logic
+                    const player = new window.WebRcadePlayer("webrcade-app-root");
+                    player.loadFeed(feedUrl);
+                };
+                
+                script.onerror = () => {
+                    document.getElementById('status').innerText = "CORE BLOCKED. NEED ALTERNATE PATH.";
+                };
+                
+                document.head.appendChild(script);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        injectEngine();
     </script>
 </body>
 </html>
