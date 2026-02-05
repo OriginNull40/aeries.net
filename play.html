@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Console</title>
-    <style>body,html{margin:0;padding:0;height:100%;overflow:hidden;background:#000;}</style>
-</head>
-<body>
+<head><title>System</title></head>
+<body style="margin:0; background:#000;">
     <div id="app-root"></div>
     <script src="engine.js"></script>
     <script>
-        // We wait 2 seconds for the loader to sneak the engine past the filter
-        setTimeout(function() {
-            try {
-                if (typeof WebRcadePlayer !== 'undefined') {
-                    const player = new WebRcadePlayer("app-root");
-                    player.loadFeed("feed.json");
-                } else {
-                    document.body.innerHTML = "<div style='color:white;text-align:center;padding-top:200px;'>BLOCKSI DETECTED: Engine injection failed.</div>";
-                }
-            } catch (e) {
-                console.error(e);
+        // Wait a few seconds for the 'machine' to download
+        setTimeout(() => {
+            if (typeof WebRcadePlayer !== 'undefined') {
+                new WebRcadePlayer("app-root").loadFeed("feed.json");
+            } else {
+                alert("The school filter is too strong. We need the Google Doc trick.");
             }
-        }, 2000);
+        }, 3000);
     </script>
 </body>
 </html>
