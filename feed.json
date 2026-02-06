@@ -9,9 +9,9 @@
           "type": "psx",
           "props": {
             "discs": [
-              "https://drive.google.com/uc?export=download&id=16RifeELnVEi33-dgxSeEoXlh-y8rSLJf",
-              "https://drive.google.com/uc?export=download&id=1lU-Hl4DbIA3YUc0cBgnN1S4423GqTDDA",
-              "https://drive.google.com/uc?export=download&id=1CdBqfkU03n5cZZ34G8GrNu2i2ubJ8VV7"
+              "https://docs.google.com/uc?export=download&confirm=t&id=16RifeELnVEi33-dgxSeEoXlh-y8rSLJf",
+              "https://docs.google.com/uc?export=download&confirm=t&id=1lU-Hl4DbIA3YUc0cBgnN1S4423GqTDDA",
+              "https://docs.google.com/uc?export=download&confirm=t&id=1CdBqfkU03n5cZZ34G8GrNu2i2ubJ8VV7"
             ],
             "forceBios": true,
             "bios": "https://originnull40.github.io/project-files/scph5501.txt"
