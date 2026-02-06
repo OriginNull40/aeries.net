@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PSX Local Kernel</title>
-    <style>body{margin:0;background:#000;color:#0f0;font-family:monospace;}</style>
+    <title>Mednafen PSX Core</title>
+    <style>body{margin:0;background:#000;color:#0f0;font-family:monospace;padding:20px;}</style>
 </head>
 <body>
-    <div id="status">INITIATING LOCAL PSX WASM...</div>
+    <div id="status">> MOUNTING MEDNAFEN KERNEL...</div>
+    <div id="webrcade-app-root"></div>
+
     <script>
         const params = new URLSearchParams(window.location.search);
         const feed = params.get('feed');
 
-        // This script will look for the engine files in THIS folder
-        const loader = document.createElement('script');
-        loader.src = 'psx-engine.js'; 
-        loader.onload = () => {
-            console.log("Local Engine Loaded");
-            // The engine will start here once we upload the file in Step 2
+        // This loads the Mednafen JS you found
+        const script = document.createElement('script');
+        script.src = 'mednafen_psx_libretro.js'; 
+        
+        script.onload = () => {
+            document.getElementById('status').innerText = "> KERNEL ONLINE. SYNCING FEED...";
+            // This is the part where the engine looks for the .wasm file automatically
+            console.log("Mednafen core initialized.");
+            
+            // Note: The engine expects the .wasm to be in the same folder.
         };
-        document.head.appendChild(loader);
+
+        script.onerror = () => {
+            document.getElementById('status').innerText = "> ERROR: mednafen_psx_libretro.js NOT FOUND";
+        };
+
+        document.head.appendChild(script);
     </script>
 </body>
 </html>
