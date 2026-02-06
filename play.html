@@ -1,35 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Booting...</title>
+    <title>System Terminal</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; color: #0f0; font-family: monospace; }
-        #status { position: absolute; top: 20px; left: 20px; font-size: 16px; }
+        body { margin: 0; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
+        #boot-log { padding: 20px; line-height: 1.5; }
+        .loading-bar { width: 300px; height: 10px; border: 1px solid #0f0; margin-top: 10px; }
+        #progress { width: 0%; height: 100%; background: #0f0; transition: width 0.5s; }
     </style>
 </head>
 <body>
-    <div id="status">INITIATING MULTI-PATH BOOT...</div>
-    <div id="app-root"></div>
-
-    <script src="engine.js"></script>
+    <div id="boot-log">
+        <div>> INITIATING SYSTEM BYPASS...</div>
+        <div id="status-1">> [  ] LOCAL_HOST_HANDSHAKE</div>
+        <div id="status-2">> [  ] PS1_KERNEL_LOAD</div>
+        <div class="loading-bar"><div id="progress"></div></div>
+    </div>
 
     <script>
-        let attempts = 0;
-        const check = setInterval(() => {
-            attempts++;
-            if (window.engineLoaded && typeof WebRcadePlayer !== 'undefined') {
-                clearInterval(check);
-                document.getElementById('status').innerHTML = "ENGINE SECURED. LOADING FEED...";
-                const player = new WebRcadePlayer("app-root");
-                player.loadFeed("feed.json");
-                setTimeout(() => { document.getElementById('status').style.display='none'; }, 3000);
-            }
-            if (attempts > 15) {
-                clearInterval(check);
-                document.getElementById('status').innerHTML = "CRITICAL FAILURE: ALL EXTERNAL PATHS BLOCKED.<br>YOUR SCHOOL HAS BLACKLISTED ALL KNOWN CDN SERVERS.";
-                document.getElementById('status').style.color = "red";
-            }
+        // Points to your feed in the main project-files folder
+        const feedUrl = "https://originnull40.github.io/project-files/feed.json";
+        
+        setTimeout(() => {
+            document.getElementById('status-1').innerText = "> [OK] LOCAL_HOST_HANDSHAKE";
+            document.getElementById('progress').style.width = "40%";
         }, 1000);
+
+        setTimeout(() => {
+            document.getElementById('status-2').innerText = "> [OK] PS1_KERNEL_LOAD";
+            document.getElementById('progress').style.width = "100%";
+        }, 2000);
+
+        setTimeout(() => {
+            // TARGETING YOUR LOCAL PSX FOLDER
+            window.location.href = "./psx/index.html?feed=" + encodeURIComponent(feedUrl);
+        }, 3000);
     </script>
 </body>
 </html>
