@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PSX Engine Room</title>
-    <style>
-        body{margin:0;background:#000;color:#0f0;font-family:monospace;padding:20px;overflow:hidden;}
-        canvas { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; }
-    </style>
+    <title>Console Hub</title>
+    <style>body{margin:0;background:#000;color:#0f0;font-family:monospace;overflow:hidden;}</style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <div id="status" style="position:relative; z-index:10;">> ENGINE READY. FETCHING DISK 1...</div>
+    <div id="status" style="padding:20px;">> INJECTING STANDALONE_CORE...</div>
+    <div id="webrcade-app-root"></div>
 
-    <script src="mednafen_psx_libretro.js"></script>
     <script>
-        // This is the specific configuration Mednafen needs to run without a 404
-        var Module = {
-            canvas: document.getElementById('canvas'),
-            onRuntimeInitialized: function() {
-                console.log("Mednafen Runtime Ready");
-                document.getElementById('status').innerText = "> BOOTING FINAL FANTASY VII...";
-                // The engine will now automatically look for the feed in the URL
+        // We are using the 'App-S3' mirror which is often missed by school blocks
+        const script = document.createElement('script');
+        script.src = 'https://webrcade.github.io/webrcade-app-common/dist/index.js';
+        
+        script.onload = () => {
+            const params = new URLSearchParams(window.location.search);
+            const feed = params.get('feed');
+            
+            // This force-starts the engine logic
+            try {
+                const player = new window.WebRcadePlayer("webrcade-app-root");
+                player.loadFeed(feed);
+                document.getElementById('status').style.display = 'none';
+            } catch(e) {
+                document.getElementById('status').innerText = "> ENGINE_CRASH: " + e.message;
             }
         };
 
-        // If the 404 persists, it's because the JS is looking for a .data file.
-        // Make sure mednafen_psx_libretro.wasm is in this same folder!
+        script.onerror = () => {
+            document.getElementById('status').innerText = "> ERROR: LOCAL_CORE_MISSING. Please check filenames.";
+        };
+        document.head.appendChild(script);
     </script>
 </body>
 </html>
