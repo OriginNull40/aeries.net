@@ -1,17 +1,17 @@
 {
-  "title": "Cloud's Journey",
+  "title": "Final Fantasy VII",
   "categories": [
     {
-      "title": "PlayStation Classics",
+      "title": "PlayStation",
       "items": [
         {
-          "title": "Final Fantasy VII (Multi-Disc)",
+          "title": "Final Fantasy VII",
           "type": "psx",
           "props": {
             "discs": [
-              "https://corsproxy.io/?https%3A%2F%2Fdocs.google.com%2Fuc%3Fexport%3Ddownload%26confirm%3Dt%26id%3D16RifeELnVEi33-dgxSeEoXlh-y8rSLJf",
-              "https://corsproxy.io/?https%3A%2F%2Fdocs.google.com%2Fuc%3Fexport%3Ddownload%26confirm%3Dt%26id%3D1lU-Hl4DbIA3YUc0cBgnN1S4423GqTDDA",
-              "https://corsproxy.io/?https%3A%2F%2Fdocs.google.com%2Fuc%3Fexport%3Ddownload%26confirm%3Dt%26id%3D1CdBqfkU03n5cZZ34G8GrNu2i2ubJ8VV7"
+              "https://docs.google.com/uc?export=download&confirm=t&id=16RifeELnVEi33-dgxSeEoXlh-y8rSLJf",
+              "https://docs.google.com/uc?export=download&confirm=t&id=1lU-Hl4DbIA3YUc0cBgnN1S4423GqTDDA",
+              "https://docs.google.com/uc?export=download&confirm=t&id=1CdBqfkU03n5cZZ34G8GrNu2i2ubJ8VV7"
             ],
             "forceBios": true,
             "bios": "https://originnull40.github.io/project-files/scph5501.txt"
