@@ -1,17 +1,30 @@
-<script>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>System Test</title>
+    <style>body{margin:0;background:#000;color:#0f0;font-family:monospace;}canvas{width:100vw;height:100vh;}</style>
+</head>
+<body>
+    <div id="status">TESTING ENGINE...</div>
+    <canvas id="canvas"></canvas>
+    <script>
         var statusElement = document.getElementById('status');
         var Module = {
             canvas: document.getElementById('canvas'),
-            // Change #1: Arguments now only point to the system folder
-            arguments: ["-system", "system"], 
+            // We're telling the engine exactly where to look for the BIOS
+            arguments: ["-L", "mednafen_psx_libretro.so", "--system", "system"],
             preRun: [function() {
-                statusElement.innerHTML = "BOOTING BIOS ONLY...";
+                // Create the system folder
                 Module.FS_createFolder("/", "system", true, true);
-                // Change #2: We are ONLY loading the BIOS brain
+                // Load the BIOS directly into that folder
                 Module.FS_createPreloadedFile("/system", "scph5501.bin", "https://originnull40.github.io/project-files/scph5501.bin", true, false);
             }],
             postRun: [function() {
                 statusElement.style.display = 'none';
+                console.log("Engine Post-Run Complete");
             }]
         };
     </script>
+    <script async src="mednafen_psx_libretro.js"></script>
+</body>
+</html>
