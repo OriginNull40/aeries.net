@@ -2,16 +2,13 @@
         var statusElement = document.getElementById('status');
         var Module = {
             canvas: document.getElementById('canvas'),
-            // We are adding the -system flag to tell it where the brain is
-            arguments: ["-system", "system", "game.chd"],
+            // Change #1: Arguments now only point to the system folder
+            arguments: ["-system", "system"], 
             preRun: [function() {
-                statusElement.innerHTML = "LOADING SYSTEM FILES...";
-                // We are creating a 'system' folder inside the virtual RAM
+                statusElement.innerHTML = "BOOTING BIOS ONLY...";
                 Module.FS_createFolder("/", "system", true, true);
-                // We put the BIOS inside that folder
+                // Change #2: We are ONLY loading the BIOS brain
                 Module.FS_createPreloadedFile("/system", "scph5501.bin", "https://originnull40.github.io/project-files/scph5501.bin", true, false);
-                // We put the game in the main folder
-                Module.FS_createPreloadedFile("/", "game.chd", "https://github.com/OriginNull40/project-files/releases/download/v1.0/Final.Fantasy.VII.Disc.1.chd", true, false);
             }],
             postRun: [function() {
                 statusElement.style.display = 'none';
