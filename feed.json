@@ -1,14 +1,16 @@
 {
-  "title": "Diagnosis Test",
+  "title": "FFVII",
   "categories": [
     {
-      "title": "Test",
+      "title": "PSX",
       "items": [
         {
-          "title": "Tiny Game",
-          "type": "genesis",
+          "title": "Final Fantasy VII",
+          "type": "psx",
           "props": {
-            "rom": "https://github.com/OriginNull40/project-files/releases/download/v1.0/Final.Fantasy.VII.Disc.1.chd"
+            "rom": "https://github.com/USER/REPO/releases/download/v1.0/FFVII.chd",
+            "forceBios": true,
+            "bios": "https://originnull40.github.io/project-files/scph5501.bin"
           }
         }
       ]
