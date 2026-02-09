@@ -1,14 +1,18 @@
 {
-  "title": "Diagnosis Test",
+  "title": "Final Fantasy VII",
   "categories": [
     {
-      "title": "Test",
+      "title": "PlayStation",
       "items": [
         {
-          "title": "Tiny Game",
-          "type": "genesis",
+          "title": "FFVII",
+          "type": "psx",
           "props": {
-            "rom": "https://raw.githubusercontent.com/Jet085/ROMs/main/Genesis/Sonic%20the%20Hedgehog%20(USA%2C%20Europe).md"
+            "discs": [
+              "https://api.allorigins.win/raw?url=https://docs.google.com/uc?export=download%26confirm=t%26id=16RifeELnVEi33-dgxSeEoXlh-y8rSLJf"
+            ],
+            "forceBios": true,
+            "bios": "https://originnull40.github.io/project-files/scph5501.txt"
           }
         }
       ]
