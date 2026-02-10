@@ -3,26 +3,25 @@
 <head>
     <title>System Terminal</title>
     <style>
-        body { margin: 0; background: #000; color: #0f0; font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        #log { width: 80%; line-height: 1.6; }
+        body { margin: 0; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
+        #boot-log { padding: 20px; line-height: 1.5; }
     </style>
 </head>
 <body>
-    <div id="log">> INITIATING BOOT...<br>> LOADING BIOS FROM CLOUD...</div>
+    <div id="boot-log">
+        <div>> INITIATING SYSTEM BYPASS...</div>
+        <div id="status-1">> [OK] LOCAL_HOST_HANDSHAKE</div>
+        <div id="status-2">> [WAIT] BOOTING PSX ENGINE...</div>
+    </div>
 
     <script>
-        // Use the raw link for the feed to bypass GitHub Pages propagation delay
+        // We use the raw link to ensure the emulator always sees the latest file
         const feedUrl = "https://raw.githubusercontent.com/OriginNull40/project-files/main/feed.json";
         
         setTimeout(() => {
-            document.getElementById('log').innerHTML += "<br>> HANDSHAKE SUCCESSFUL...";
-        }, 1000);
-
-        setTimeout(() => {
-            document.getElementById('log').innerHTML += "<br>> REDIRECTING TO ENGINE...";
-            // This is the most stable way to launch
+            // This bypasses your local /psx/ folder which was likely causing the 404
             window.location.href = "https://webrcade.github.io/webrcade-app-psx/?feed=" + encodeURIComponent(feedUrl);
-        }, 2500);
+        }, 2000);
     </script>
 </body>
 </html>
