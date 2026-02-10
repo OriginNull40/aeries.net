@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Station</title>
+    <title>My Game Menu</title>
     <style>
-        body { margin: 0; background: #1a1a1a; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
-        .btn { padding: 15px 30px; background: #0070d1; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.2rem; }
-        .btn:hover { background: #005bb5; }
+        body { background: #111; color: white; text-align: center; font-family: sans-serif; padding-top: 50px; }
+        .launch-btn { 
+            background: #28a745; color: white; padding: 20px 40px; 
+            font-size: 24px; border: none; border-radius: 10px; cursor: pointer; 
+        }
+        .launch-btn:hover { background: #218838; }
     </style>
 </head>
 <body>
-    <div>
-        <h1>RETRO STATION</h1>
-        <p>Ready to boot?</p>
-        <br>
-        <a href="play.html" class="btn">START SYSTEM</a>
-    </div>
+    <h1>WebRcade Project</h1>
+    <p>Click the button below to start the emulator.</p>
+    <button class="launch-btn" onclick="window.location.href='play.html'">
+        LAUNCH PLAYER
+    </button>
 </body>
 </html>
