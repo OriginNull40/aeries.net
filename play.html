@@ -3,38 +3,26 @@
 <head>
     <title>System Terminal</title>
     <style>
-        body { margin: 0; background: #000; color: #0f0; font-family: monospace; overflow: hidden; }
-        #boot-log { padding: 20px; line-height: 1.5; }
-        .loading-bar { width: 300px; height: 10px; border: 1px solid #0f0; margin-top: 10px; }
-        #progress { width: 0%; height: 100%; background: #0f0; transition: width 0.5s; }
+        body { margin: 0; background: #000; color: #0f0; font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        #log { width: 80%; line-height: 1.6; }
     </style>
 </head>
 <body>
-    <div id="boot-log">
-        <div>> INITIATING SYSTEM BYPASS...</div>
-        <div id="status-1">> [  ] LOCAL_HOST_HANDSHAKE</div>
-        <div id="status-2">> [  ] PS1_KERNEL_LOAD</div>
-        <div class="loading-bar"><div id="progress"></div></div>
-    </div>
+    <div id="log">> INITIATING BOOT...<br>> LOADING BIOS FROM CLOUD...</div>
 
     <script>
-        // Using the Raw link for the feed to ensure no CORS/Cache issues
+        // Use the raw link for the feed to bypass GitHub Pages propagation delay
         const feedUrl = "https://raw.githubusercontent.com/OriginNull40/project-files/main/feed.json";
         
         setTimeout(() => {
-            document.getElementById('status-1').innerText = "> [OK] LOCAL_HOST_HANDSHAKE";
-            document.getElementById('progress').style.width = "40%";
+            document.getElementById('log').innerHTML += "<br>> HANDSHAKE SUCCESSFUL...";
         }, 1000);
 
         setTimeout(() => {
-            document.getElementById('status-2').innerText = "> [OK] PS1_KERNEL_LOAD";
-            document.getElementById('progress').style.width = "100%";
-        }, 2000);
-
-        setTimeout(() => {
-            // Direct launch to the webRcade PSX engine with your feed attached
+            document.getElementById('log').innerHTML += "<br>> REDIRECTING TO ENGINE...";
+            // This is the most stable way to launch
             window.location.href = "https://webrcade.github.io/webrcade-app-psx/?feed=" + encodeURIComponent(feedUrl);
-        }, 3000);
+        }, 2500);
     </script>
 </body>
 </html>
