@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PSX Recovery</title>
+    <title>PSX Local Mednafen</title>
     <style>
-        body { margin:0; background:#000; color:#0f0; font-family:monospace; display:flex; align-items:center; justify-content:center; height:100vh; }
-        #status { text-align:center; }
-        canvas { position:absolute; top:0; left:0; width:100vw; height:100vh; }
+        body { margin: 0; background: #000; color: #0f0; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        #status { text-align: center; font-size: 18px; }
+        canvas { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; }
     </style>
 </head>
 <body>
-    <div id="status">STARTING MEDNAFEN ENGINE...</div>
+    <div id="status">INITIALIZING MEDNAFEN...</div>
     <canvas id="canvas"></canvas>
 
     <script>
         var statusElement = document.getElementById('status');
         var Module = {
             canvas: document.getElementById('canvas'),
-            // We are NOT using the system folder, just the BIOS name
+            // We tell the engine to just boot the BIOS file directly
             arguments: ["scph5501.bin"],
             preRun: [function() {
-                statusElement.innerHTML = "LOADING BIOS...";
-                // This points directly to your BIOS file
+                statusElement.innerHTML = "LOADING BIOS FROM YOUR REPO...";
+                // This points to YOUR BIOS in YOUR folder
                 Module.FS_createPreloadedFile("/", "scph5501.bin", "https://originnull40.github.io/project-files/scph5501.bin", true, false);
             }],
             postRun: [function() {
                 statusElement.style.display = 'none';
-            }]
+            }],
+            printErr: function(text) {
+                // If the engine fails, it will print the error on the screen
+                statusElement.innerHTML = "ENGINE ERROR: " + text;
+            }
         };
     </script>
 
