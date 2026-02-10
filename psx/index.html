@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PSX Light Loader</title>
+    <title>PSX Fast Loader</title>
     <style>
         body { margin: 0; background: #000; color: #0f0; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; }
-        #status { text-align: center; font-size: 20px; }
+        #status { text-align: center; }
         canvas { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; }
     </style>
 </head>
 <body>
-    <div id="status">INITIALIZING LIGHTWEIGHT ENGINE...</div>
+    <div id="status">PULLING ENGINE FROM CLOUD...</div>
     <canvas id="canvas"></canvas>
 
     <script>
         var statusElement = document.getElementById('status');
         var Module = {
             canvas: document.getElementById('canvas'),
-            // We tell the engine to just look for the BIOS immediately
             arguments: ["scph5501.bin"],
             preRun: [function() {
-                statusElement.innerHTML = "LOADING BIOS BRAIN...";
-                // Load BIOS into the root folder (no 'system' folder needed for this engine)
+                statusElement.innerHTML = "INJECTING BIOS...";
+                // We still use YOUR BIOS from YOUR GitHub
                 Module.FS_createPreloadedFile("/", "scph5501.bin", "https://originnull40.github.io/project-files/scph5501.bin", true, false);
             }],
             postRun: [function() {
                 statusElement.style.display = 'none';
-            }],
-            printErr: function(text) {
-                if (text.includes("error")) {
-                    statusElement.innerHTML = "BOOT ERROR: " + text;
-                    statusElement.style.color = "red";
-                }
-            }
+            }]
         };
     </script>
 
-    <script async src="pcsx_rearmed_libretro.js"></script>
+    <script async src="https://webrcade.github.io/webrcade-app-common/v1/libretro/pcsx_rearmed_libretro.js"></script>
 </body>
 </html>
