@@ -9,26 +9,25 @@
     </style>
 </head>
 <body>
-    <div id="status">INITIALIZING MEDNAFEN...</div>
+    <div id="status">INITIALIZING...</div>
     <canvas id="canvas"></canvas>
 
     <script>
         var statusElement = document.getElementById('status');
         var Module = {
             canvas: document.getElementById('canvas'),
-            // We tell the engine to just boot the BIOS file directly
             arguments: ["scph5501.bin"],
             preRun: [function() {
-                statusElement.innerHTML = "LOADING BIOS FROM YOUR REPO...";
-                // This points to YOUR BIOS in YOUR folder
-                Module.FS_createPreloadedFile("/", "scph5501.bin", "https://originnull40.github.io/project-files/scph5501.bin", true, false);
+                statusElement.innerHTML = "MOUNTING BIOS...";
+                // CHANGE: We are using a relative path "../scph5501.bin" 
+                // This tells the browser: "Look one folder up for the file."
+                Module.FS_createPreloadedFile("/", "scph5501.bin", "../scph5501.bin", true, false);
             }],
             postRun: [function() {
                 statusElement.style.display = 'none';
             }],
             printErr: function(text) {
-                // If the engine fails, it will print the error on the screen
-                statusElement.innerHTML = "ENGINE ERROR: " + text;
+                statusElement.innerHTML = "SYSTEM LOG: " + text;
             }
         };
     </script>
