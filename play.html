@@ -18,8 +18,8 @@
     </div>
 
     <script>
-        // Points to your feed in the main project-files folder
-        const feedUrl = "https://originnull40.github.io/project-files/feed.json";
+        // Using the Raw link for the feed to ensure no CORS/Cache issues
+        const feedUrl = "https://raw.githubusercontent.com/OriginNull40/project-files/main/feed.json";
         
         setTimeout(() => {
             document.getElementById('status-1').innerText = "> [OK] LOCAL_HOST_HANDSHAKE";
@@ -32,8 +32,8 @@
         }, 2000);
 
         setTimeout(() => {
-            // TARGETING YOUR LOCAL PSX FOLDER
-            window.location.href = "./psx/index.html?feed=" + encodeURIComponent(feedUrl);
+            // Direct launch to the webRcade PSX engine with your feed attached
+            window.location.href = "https://webrcade.github.io/webrcade-app-psx/?feed=" + encodeURIComponent(feedUrl);
         }, 3000);
     </script>
 </body>
